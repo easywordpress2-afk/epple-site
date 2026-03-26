@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epple — Fonctionnalites</title>
+<meta name="description" content="Decouvrez toutes les fonctionnalites du Epple Laptop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --accent: #0071E3;
+  --accent-rgb: 0, 113, 227;
+  --accent-light: #3d9aff;
+  --bg: #0a0a0f;
+  --bg-card: rgba(10, 10, 15, 0.85);
+  --border-card: rgba(255, 255, 255, 0.12);
+  --text-primary: #f5f5f7;
+  --text-secondary: rgba(245, 245, 247, 0.55);
+  --font-heading: 'Space Grotesk', -apple-system, 'Helvetica Neue', sans-serif;
+  --font-body: 'Archivo', -apple-system, 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+::selection {
+  background: rgba(var(--accent-rgb), 0.3);
+  color: var(--text-primary);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent), var(--accent-light));
+  border-radius: 4px;
+}
+
+/* ========== STARSCAPE ========== */
+#starscape {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ========== SCROLL PROGRESS ========== */
+#scrollProgress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  z-index: 10000;
+  transition: width 0.1s linear;
+}
+
+/* ========== NAVBAR ========== */
+#navbar {
+  position: fixed;
+  top: 12px;
+  left: 0; right: 0;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-inner {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 12px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.nav-logo svg { width: 20px; height: 20px; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover { color: var(--text-primary); }
+.nav-links a.active { color: var(--text-primary); }
+.nav-cta {
+  background: var(--accent) !important;
+  color: #fff !important;
+  padding: 8px 20px;
+  border-radius: 980px;
+  font-weight: 600;
+  font-size: 0.85rem !important;
+}
+.nav-cta:hover { box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.4); }
+
+#navbar.nav-scrolled .nav-inner {
+  max-width: 820px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 100px;
+  padding: 10px 24px;
+}
+
+/* ========== PAGE HERO ========== */
+.page-hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 160px 32px 80px;
+  overflow: hidden;
+}
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  background: var(--accent);
+  opacity: 0.1;
+  top: -200px; right: -100px;
+}
+.orb-2 {
+  width: 400px; height: 400px;
+  background: var(--accent);
+  opacity: 0.06;
+  bottom: -150px; left: -100px;
+}
+.page-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 2;
+}
+.page-hero h1 span {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.page-hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ========== FEATURE SECTIONS ========== */
+.feature-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 32px;
+}
+
+.feature-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 100px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.feature-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.feature-block:nth-child(even) {
+  direction: rtl;
+}
+.feature-block:nth-child(even) > * {
+  direction: ltr;
+}
+
+.feature-text .feature-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.feature-text h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.feature-text p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.feature-specs {
+  display: flex;
+  gap: 32px;
+}
+.feature-spec-item {
+  text-align: center;
+}
+.feature-spec-value {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+.feature-spec-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.feature-visual {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+.feature-visual-icon {
+  font-size: 6rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+}
+.feature-visual-glow {
+  position: absolute;
+  width: 200px; height: 200px;
+  background: var(--accent);
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+}
+
+/* ========== COMPARISON TABLE ========== */
+.comparison-section {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 32px;
+}
+.comparison-section h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.comparison-table thead th {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 20px 24px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-card);
+  color: var(--text-primary);
+}
+.comparison-table thead th:last-child {
+  color: var(--accent);
+}
+.comparison-table tbody td {
+  padding: 16px 24px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.comparison-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.comparison-table tbody td:first-child {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.comparison-table tbody td:last-child {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.check { color: #30d158; }
+.cross { color: rgba(255,255,255,0.2); }
+
+/* ========== ALL SPECS GRID ========== */
+.all-specs {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 32px;
+}
+.all-specs h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.specs-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.spec-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 28px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.spec-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--accent-rgb), 0.2);
+}
+.spec-card-value {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+.spec-card-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 8px;
+}
+.spec-card-desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.4;
+}
+
+/* ========== CTA ========== */
+#cta {
+  text-align: center;
+  padding: 120px 32px;
+  position: relative;
+  z-index: 1;
+}
+#cta h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+#cta p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 36px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: 980px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.3);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.5);
+  transform: translateY(-2px);
+}
+.btn-large { font-size: 1.1rem; padding: 18px 48px; }
+.cta-orb {
+  position: absolute;
+  width: 400px; height: 400px;
+  background: var(--accent);
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.08;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 60px 32px 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.footer-brand svg { width: 20px; height: 20px; }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+.footer-links a:hover { color: var(--text-primary); }
+.footer-copy {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .specs-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-inner { padding: 10px 20px; }
+  #navbar.nav-scrolled .nav-inner { max-width: 200px; padding: 8px 20px; }
+  .feature-block {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .feature-block:nth-child(even) { direction: ltr; }
+  .feature-visual { min-height: 220px; }
+  .specs-cards { grid-template-columns: 1fr; }
+  .comparison-table { font-size: 0.85rem; }
+  .comparison-table thead th,
+  .comparison-table tbody td { padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="starscape"></canvas>
+
+<div id="scrollProgress"></div>
+
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 14 44" xmlns="http://www.w3.org/2000/svg">
+        <path d="m13.0729 17.6825a3.61 3.61 0 0 0-1.7248 3.0365 3.5132 3.5132 0 0 0 2.1379 3.2223 8.394 8.394 0 0 1-1.0948 2.2618c-.6816.9812-1.3943 1.9623-2.4787 1.9623s-1.3633-.63-2.613-.63c-1.2187 0-1.6525.6507-2.644.6507s-1.6834-.9089-2.4787-2.0243a9.7842 9.7842 0 0 1-1.6628-5.2776c0-3.0984 2.014-4.7405 3.9969-4.7405 1.0535 0 1.9314.6919 2.5924.6919.63 0 1.6112-.7333 2.8092-.7333a3.7579 3.7579 0 0 1 3.1604 1.5802zm-3.7284-2.8918a3.5615 3.5615 0 0 0 .8469-2.22 1.5353 1.5353 0 0 0-.031-.32 3.5686 3.5686 0 0 0-2.3445 1.2084 3.4629 3.4629 0 0 0-.8779 2.1585 1.419 1.419 0 0 0 .031.2892 1.19 1.19 0 0 0 .2169.0207 3.0935 3.0935 0 0 0 2.1586-1.1368z" fill="rgba(255,255,255,0.9)"/>
+      </svg>
+      Epple
+    </a>
+    <div class="nav-links">
+      <a href="/fonctionnalites.html" class="active">Fonctionnalites</a>
+      <a href="/#specs">Specs</a>
+      <a href="/#cta" class="nav-cta">Acheter</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== PAGE HERO ========== -->
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+  <h1>Chaque detail est une <span>fonctionnalite.</span></h1>
+  <p>Le Epple Laptop repousse les limites de la performance, du design et de l'autonomie. Decouvrez ce qui le rend unique.</p>
+</section>
+
+<!-- ========== FEATURE SECTIONS ========== -->
+<div class="feature-section">
+
+  <!-- 1. Puce Silicon -->
+  <div class="feature-block">
+    <div class="feature-text">
+      <div class="feature-tag">Performance</div>
+      <h2>Puce Epple M4 Ultra</h2>
+      <p>Une architecture systeme-sur-puce de nouvelle generation. Le CPU 12 coeurs gere les taches les plus exigeantes tandis que le GPU 38 coeurs accelere les rendus 3D, le montage video 8K et les modeles d'IA en local — le tout sans ventilateur audible.</p>
+      <div class="feature-specs">
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">12</span>
+          <span class="feature-spec-label">Coeurs CPU</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">38</span>
+          <span class="feature-spec-label">Coeurs GPU</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">16</span>
+          <span class="feature-spec-label">Neural Engine</span>
+        </div>
+      </div>
+    </div>
+    <div class="feature-visual">
+      <div class="feature-visual-glow"></div>
+      <div class="feature-visual-icon">&#9881;</div>
+    </div>
+  </div>
+
+  <!-- 2. Ecran -->
+  <div class="feature-block">
+    <div class="feature-text">
+      <div class="feature-tag">Ecran</div>
+      <h2>Liquid Retina XDR</h2>
+      <p>Une dalle miniLED de 16,2 pouces avec un ratio de contraste de 1 000 000:1 et une luminosite de pointe de 1600 nits. La technologie ProMotion ajuste dynamiquement le taux de rafraichissement de 24 a 120 Hz selon le contenu affiche.</p>
+      <div class="feature-specs">
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">120Hz</span>
+          <span class="feature-spec-label">ProMotion</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">1600</span>
+          <span class="feature-spec-label">Nits (pointe)</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">1M:1</span>
+          <span class="feature-spec-label">Contraste</span>
+        </div>
+      </div>
+    </div>
+    <div class="feature-visual">
+      <div class="feature-visual-glow"></div>
+      <div class="feature-visual-icon">&#128187;</div>
+    </div>
+  </div>
+
+  <!-- 3. Batterie -->
+  <div class="feature-block">
+    <div class="feature-text">
+      <div class="feature-tag">Autonomie</div>
+      <h2>22 heures. Sans compromis.</h2>
+      <p>Des cellules lithium-polymere haute densite combinees a l'efficacite energetique exceptionnelle de la puce M4 Ultra. Travaillez, creez, streamez — du matin au soir sans chercher de prise.</p>
+      <div class="feature-specs">
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">22h</span>
+          <span class="feature-spec-label">Video</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">15h</span>
+          <span class="feature-spec-label">Navigation web</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">50%</span>
+          <span class="feature-spec-label">En 30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="feature-visual">
+      <div class="feature-visual-glow"></div>
+      <div class="feature-visual-icon">&#9889;</div>
+    </div>
+  </div>
+
+  <!-- 4. Audio -->
+  <div class="feature-block">
+    <div class="feature-text">
+      <div class="feature-tag">Audio</div>
+      <h2>Audio Spatial a six haut-parleurs</h2>
+      <p>Un systeme sonore a six haut-parleurs avec deux tweeters et quatre woofers a annulation de force. Le support Dolby Atmos cree un champ sonore tridimensionnel qui vous enveloppe — sans casque.</p>
+      <div class="feature-specs">
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">6</span>
+          <span class="feature-spec-label">Haut-parleurs</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">Atmos</span>
+          <span class="feature-spec-label">Dolby</span>
+        </div>
+      </div>
+    </div>
+    <div class="feature-visual">
+      <div class="feature-visual-glow"></div>
+      <div class="feature-visual-icon">&#127925;</div>
+    </div>
+  </div>
+
+  <!-- 5. Connectique -->
+  <div class="feature-block">
+    <div class="feature-text">
+      <div class="feature-tag">Connectique</div>
+      <h2>Tous les ports dont vous avez besoin</h2>
+      <p>Fini les hubs et les dongles. Le Epple Laptop embarque trois ports Thunderbolt 5, un port HDMI 2.1, un lecteur de carte SDXC, une prise casque haute impedance et le connecteur MagSafe 3 pour la charge.</p>
+      <div class="feature-specs">
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">3x</span>
+          <span class="feature-spec-label">Thunderbolt 5</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">HDMI</span>
+          <span class="feature-spec-label">2.1 8K</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">Wi-Fi 7</span>
+          <span class="feature-spec-label">Sans fil</span>
+        </div>
+      </div>
+    </div>
+    <div class="feature-visual">
+      <div class="feature-visual-glow"></div>
+      <div class="feature-visual-icon">&#128268;</div>
+    </div>
+  </div>
+
+  <!-- 6. Securite -->
+  <div class="feature-block">
+    <div class="feature-text">
+      <div class="feature-tag">Securite</div>
+      <h2>Vos donnees, votre forteresse</h2>
+      <p>Le Secure Enclave chiffre vos donnees au niveau materiel. Touch ID permet un deverrouillage biometrique instantane. Le demarrage securise garantit que seul un systeme de confiance peut se lancer.</p>
+      <div class="feature-specs">
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">AES</span>
+          <span class="feature-spec-label">256-bit</span>
+        </div>
+        <div class="feature-spec-item">
+          <span class="feature-spec-value">Touch ID</span>
+          <span class="feature-spec-label">Biometrique</span>
+        </div>
+      </div>
+    </div>
+    <div class="feature-visual">
+      <div class="feature-visual-glow"></div>
+      <div class="feature-visual-icon">&#128274;</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========== COMPARISON TABLE ========== -->
+<section class="comparison-section">
+  <h2>Comment il se compare</h2>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Fonctionnalite</th>
+        <th>Standard</th>
+        <th>Epple Laptop</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Memoire unifiee</td>
+        <td class="cross">&#10005; Non</td>
+        <td class="check">&#10003; Jusqu'a 96 Go</td>
+      </tr>
+      <tr>
+        <td>Autonomie</td>
+        <td>8-12 heures</td>
+        <td class="check">22 heures</td>
+      </tr>
+      <tr>
+        <td>Ecran 120Hz ProMotion</td>
+        <td class="cross">&#10005; 60Hz fixe</td>
+        <td class="check">&#10003; 24-120Hz adaptatif</td>
+      </tr>
+      <tr>
+        <td>Neural Engine IA</td>
+        <td class="cross">&#10005; Non</td>
+        <td class="check">&#10003; 16 coeurs</td>
+      </tr>
+      <tr>
+        <td>Audio Spatial</td>
+        <td>Stereo basique</td>
+        <td class="check">&#10003; Dolby Atmos 6HP</td>
+      </tr>
+      <tr>
+        <td>Charge rapide</td>
+        <td>2h+ pour 100%</td>
+        <td class="check">50% en 30 min</td>
+      </tr>
+      <tr>
+        <td>Thunderbolt 5</td>
+        <td class="cross">&#10005; USB-C 3.2</td>
+        <td class="check">&#10003; 3 ports</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== ALL SPECS GRID ========== -->
+<section class="all-specs">
+  <h2>Toutes les specifications</h2>
+  <div class="specs-cards">
+    <div class="spec-card">
+      <span class="spec-card-value">16,2"</span>
+      <span class="spec-card-label">Ecran</span>
+      <span class="spec-card-desc">Liquid Retina XDR, miniLED, 3456x2234, P3 large gamut</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-card-value">96 Go</span>
+      <span class="spec-card-label">Memoire</span>
+      <span class="spec-card-desc">LPDDR5X unifiee, bande passante 800 Go/s</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-card-value">8 To</span>
+      <span class="spec-card-label">Stockage</span>
+      <span class="spec-card-desc">SSD NVMe, lecture 7,4 Go/s, ecriture 6,3 Go/s</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-card-value">1,24 kg</span>
+      <span class="spec-card-label">Poids</span>
+      <span class="spec-card-desc">Chassis aluminium recycle unibody</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-card-value">1080p</span>
+      <span class="spec-card-label">Camera</span>
+      <span class="spec-card-desc">FaceTime HD, ISP avance, faible luminosite</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-card-value">Wi-Fi 7</span>
+      <span class="spec-card-label">Sans fil</span>
+      <span class="spec-card-desc">Bluetooth 5.4, bande passante jusqu'a 46 Gbit/s</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section id="cta">
+  <div class="cta-orb"></div>
+  <h2>Convaincu ?</h2>
+  <p>Configurez votre Epple Laptop et recevez-le chez vous en 48 heures.</p>
+  <a href="#" class="btn-primary btn-large">Acheter maintenant</a>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-brand">
+    <svg viewBox="0 0 14 44" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+      <path d="m13.0729 17.6825a3.61 3.61 0 0 0-1.7248 3.0365 3.5132 3.5132 0 0 0 2.1379 3.2223 8.394 8.394 0 0 1-1.0948 2.2618c-.6816.9812-1.3943 1.9623-2.4787 1.9623s-1.3633-.63-2.613-.63c-1.2187 0-1.6525.6507-2.644.6507s-1.6834-.9089-2.4787-2.0243a9.7842 9.7842 0 0 1-1.6628-5.2776c0-3.0984 2.014-4.7405 3.9969-4.7405 1.0535 0 1.9314.6919 2.5924.6919.63 0 1.6112-.7333 2.8092-.7333a3.7579 3.7579 0 0 1 3.1604 1.5802zm-3.7284-2.8918a3.5615 3.5615 0 0 0 .8469-2.22 1.5353 1.5353 0 0 0-.031-.32 3.5686 3.5686 0 0 0-2.3445 1.2084 3.4629 3.4629 0 0 0-.8779 2.1585 1.419 1.419 0 0 0 .031.2892 1.19 1.19 0 0 0 .2169.0207 3.0935 3.0935 0 0 0 2.1586-1.1368z" fill="rgba(255,255,255,0.9)"/>
+    </svg>
+    Epple
+  </div>
+  <div class="footer-links">
+    <a href="#">Confidentialite</a>
+    <a href="#">Mentions legales</a>
+    <a href="#">Contact</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Epple. Tous droits reserves.</p>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // Starscape
+  const starCanvas = document.getElementById('starscape');
+  const starCtx = starCanvas.getContext('2d');
+  const stars = [];
+  function initStars() {
+    const dpr = window.devicePixelRatio || 1;
+    starCanvas.width = window.innerWidth * dpr;
+    starCanvas.height = window.innerHeight * dpr;
+    starCanvas.style.width = window.innerWidth + 'px';
+    starCanvas.style.height = window.innerHeight + 'px';
+    if (stars.length === 0) {
+      for (let i = 0; i < 180; i++) {
+        stars.push({
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * starCanvas.height,
+          radius: 0.3 + Math.random() * 1.2,
+          baseOpacity: 0.2 + Math.random() * 0.6,
+          driftX: (Math.random() - 0.5) * 0.04,
+          driftY: (Math.random() - 0.5) * 0.02,
+          twinkleSpeed: 0.001 + Math.random() * 0.003,
+          twinklePhase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+  }
+  function animateStars() {
+    starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+    const now = Date.now();
+    stars.forEach(s => {
+      s.x += s.driftX; s.y += s.driftY;
+      if (s.x < 0) s.x = starCanvas.width;
+      if (s.x > starCanvas.width) s.x = 0;
+      if (s.y < 0) s.y = starCanvas.height;
+      if (s.y > starCanvas.height) s.y = 0;
+      const twinkle = Math.sin(now * s.twinkleSpeed + s.twinklePhase);
+      starCtx.beginPath();
+      starCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      starCtx.fillStyle = 'rgba(255,255,255,' + Math.max(0, s.baseOpacity + twinkle * 0.3) + ')';
+      starCtx.fill();
+    });
+    requestAnimationFrame(animateStars);
+  }
+  initStars(); animateStars();
+  window.addEventListener('resize', initStars);
+
+  // Scroll progress + navbar
+  const scrollProgress = document.getElementById('scrollProgress');
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    const scrollY = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    scrollProgress.style.width = ((scrollY / maxScroll) * 100) + '%';
+    navbar.classList.toggle('nav-scrolled', scrollY > 80);
+  }, { passive: true });
+
+  // Feature blocks reveal on scroll
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.feature-block').forEach(function(block) {
+    observer.observe(block);
+  });
+
+})();
+</script>
+</body>
+</html>
