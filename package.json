@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/easywordpress2-afk/epple-site#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^4.22.1"
   }
 }
